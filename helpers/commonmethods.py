@@ -4,6 +4,9 @@ import logging as logger
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
+import csv
+
+from helpers import testconfig
 
 logger.basicConfig(filename='../../reports/logs/fb.log', datefmt='%m/%d/%Y %I:%M:%S %p',filemode='w',encoding='utf-8',level=logger.DEBUG)
 
@@ -39,3 +42,13 @@ def get_element(driver,locator):
     except Exception as e:
         log("Error in element finding - "+str(e),"error")
         return None
+def close_browser(driver):
+    driver.close()
+
+def read_csv_cred():
+    with open(testconfig.csv_cred_path, mode='r') as file:
+        csvreader = csv.reader(file)
+        creds =[]
+        for lines in csvreader:
+            creds.append([lines[0],lines[1]])
+    return creds

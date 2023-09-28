@@ -14,4 +14,20 @@ def verify_text(driver):
         helper.log("Error in sub title verification - "+str(e),"error")
 
 def verify_login(driver):
-    pass
+    try:
+        helper.get_element(driver, fb_email).send_keys(testdata.email)
+        helper.get_element(driver, fb_pass).send_keys(testdata.password)
+        helper.get_element(driver, fb_login_btn).click()
+        helper.log("login verified", "info")
+    except AssertionError as e:
+        helper.log("Error in login verification - " + str(e), "error")
+
+
+def verify_logincsv(driver,username,password):
+    try:
+        helper.get_element(driver, fb_email).send_keys(username)
+        helper.get_element(driver, fb_pass).send_keys(password)
+        helper.get_element(driver, fb_login_btn).click()
+        helper.log("login verified", "info")
+    except AssertionError as e:
+        helper.log("Error in login verification - " + str(e), "error")
